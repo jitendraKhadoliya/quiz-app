@@ -27,15 +27,19 @@
 // App.js
 
 import React from "react";
-import QuizDetail from "./screens/QuizDetail";
+// import QuizDetail from "./screens/QuizDetail";
 import QuizHero from "./screens/QuizHero";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import QuizDetail from "./screens/QuizDetail";
 
 const App = () => {
   return (
-    <div>
-      {/* <QuizDetail /> */}
-      <QuizHero />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<QuizHero />} />
+        <Route path="/quiz-started" element={<QuizDetail />} />
+      </Routes>
+    </Router>
   );
 };
 

@@ -1,21 +1,14 @@
 // screens/QuizDetail.js
 
 import React, { useState } from "react";
-import QuizDetailScreen from "../components/QuizDetailScreen";
 import QuizAttemptScreen from "../components/QuizAttemptScreen";
 import QuizResultScreen from "./QuizResultScreen";
-// import QuizResultScreen from "./QuizResultScreen";
 import quizData from "../data/quizData";
 
 const QuizDetail = () => {
-  const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
   const [timeTaken, setTimeTaken] = useState(0);
-
-  const handleStartQuiz = () => {
-    setQuizStarted(true);
-  };
 
   const handleQuizSubmit = (userAnswers, timer) => {
     let correctAnswers = 0;
@@ -37,8 +30,7 @@ const QuizDetail = () => {
 
   return (
     <div>
-      {!quizStarted && <QuizDetailScreen onStartQuiz={handleStartQuiz} />}
-      {quizStarted && !quizCompleted && (
+      {!quizCompleted && (
         <QuizAttemptScreen
           questions={quizData}
           onQuizSubmit={handleQuizSubmit}

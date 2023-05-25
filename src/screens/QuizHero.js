@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./quizHero.scss";
 import { BsArrowLeft, BsQuestionCircle } from "react-icons/bs";
 import {
   AiOutlineSearch,
+  AiOutlineClose,
   AiFillStar,
   AiOutlineFileText,
   AiOutlineClockCircle,
+  AiOutlineQuestionCircle,
+  AiOutlineExclamation,
 } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { FaRegCommentDots, FaRegClone } from "react-icons/fa";
 import { VscSaveAs } from "react-icons/vsc";
-import { GiCrossedSwords } from "react-icons/gi";
+import { GiAchievement, GiCrossedSwords } from "react-icons/gi";
 import heroImage from "../assets/hero-image.png";
+import { useNavigate } from "react-router-dom";
 
 const QuizHero = () => {
+  const [toggleState, setToggleState] = useState(0);
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+  let navigate = useNavigate();
+
+  const handleQuizStart = () => {
+    navigate("/quiz-started");
+  };
   return (
     <div className="hero-section">
       <div className="hero-subSection">
@@ -87,8 +100,60 @@ const QuizHero = () => {
             </div>
           </div>
           <div className="btn">
-            <button>Take Quiz</button>
+            <button onClick={() => toggleTab(1)}>Take Quiz</button>
           </div>
+          {
+            <div
+              className={
+                toggleState === 1
+                  ? "services__modal active-modal"
+                  : "services__modal"
+              }
+            >
+              <div className="services__modal-content">
+                <div className="close-btn">
+                  <AiOutlineClose onClick={() => toggleTab(0)} />
+                </div>
+
+                <h4 className="services__modal-title">Quiz rule </h4>
+                <div className="services__modal-description">
+                  <div>
+                    <AiOutlineClockCircle />
+                  </div>
+                  <div className="services__modal-sub-description">
+                    <span>10 Mins </span>
+                    <span> keep In mind that its time bound quiz</span>
+                  </div>
+                </div>
+                <div className="services__modal-description">
+                  <div>
+                    <AiOutlineQuestionCircle />
+                  </div>
+                  <div className="services__modal-sub-description">
+                    <span>5 Questions </span>
+                    <span> We believe that you will ace it </span>
+                  </div>
+                </div>
+                <div className="services__modal-description">
+                  <div>
+                    <GiAchievement />
+                  </div>
+                  <div className="services__modal-sub-description">
+                    <span>50% passing </span>
+                    <span> all the best! see you on other side</span>
+                  </div>
+                </div>
+                <div className="services__modal-sign">
+                  <AiOutlineExclamation /> this quiz can be attempered ones in
+                  daily
+                </div>
+
+                <div className="btn">
+                  <button onClick={handleQuizStart}>Start</button>
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>
