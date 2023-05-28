@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
 import Question from "./Question";
+import "./quizAttemptScreen.scss";
 
 const QuizAttemptScreen = ({ questions, onQuizSubmit }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -44,21 +45,26 @@ const QuizAttemptScreen = ({ questions, onQuizSubmit }) => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div>
-      <h1>Quiz Attempt Screen</h1>
-      <Timer timeRemaining={timeRemaining} />
-      <Question
-        currentQuestionIndex={currentQuestionIndex}
-        currentQuestion={currentQuestion}
-        selectedOptions={selectedOptions}
-        handleOptionSelect={handleOptionSelect}
-      />
-      <button
-        disabled={!selectedOptions[currentQuestionIndex]}
-        onClick={handleNextQuestion}
-      >
-        Next Question
-      </button>
+    <div className="attempt-section">
+      <div className="attempt-subSection">
+        <Timer
+          timeRemaining={timeRemaining}
+          currentQuestionIndex={currentQuestionIndex}
+        />
+
+        <Question
+          currentQuestionIndex={currentQuestionIndex}
+          currentQuestion={currentQuestion}
+          selectedOptions={selectedOptions}
+          handleOptionSelect={handleOptionSelect}
+        />
+        <button
+          disabled={!selectedOptions[currentQuestionIndex]}
+          onClick={handleNextQuestion}
+        >
+          Next Question
+        </button>
+      </div>
     </div>
   );
 };
